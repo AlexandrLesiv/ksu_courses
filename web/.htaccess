@@ -1,0 +1,34 @@
+RewriteEngine on
+
+# If a directory or a file exists, use the request directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Otherwise forward the request to index.php
+RewriteRule . index.php
+
+AddHandler application/x-httpd-php .html
+AddHandler cgi-script .pl .py .jsp .asp .htm .shtml .sh .cgi
+AddType application/x-javascript .js
+AddType text/css .css
+AddType text/xml .xml
+AddType application/octet-stream .doc .mov .avi .pdf .xls
+# ForceType application/x-httpd-php
+
+<ifModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript
+</ifModule>
+
+# <ifModule mod_headers.c>
+#     <FilesMatch "\.(html|htm)$">
+#         Header set Cache-Control "max-age=2592000"
+#     </FilesMatch>
+#     <FilesMatch "\.(js|css|txt)$">
+#         Header set Cache-Control "max-age=2592000"
+#     </FilesMatch>
+#     <FilesMatch "\.(flv|swf|ico|gif|jpg|jpeg|png|svg)$">
+#         Header set Cache-Control "max-age=2592000"
+#     </FilesMatch>
+#     <FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
+#         Header unset Cache-Control
+#     </FilesMatch>
+# </IfModule>
